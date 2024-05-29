@@ -7,8 +7,7 @@ export class Conta {
   protected nome: string;
   protected saldo: number = Armazenador.obter("saldo") || 0;
   private transacoes: Transacao[] =
-    JSON.parse(
-      localStorage.getItem("transacoes"),
+    Armazenador.obter(("transacoes"),
       (key: string, value: any) => {
         if (key === "data") {
           return new Date(value);
@@ -74,7 +73,7 @@ export class Conta {
 
     this.transacoes.push(novaTransacao);
     console.log(this.getGruposTransacoes());
-    localStorage.setItem("transacoes", JSON.stringify(this.transacoes));
+    Armazenador.salvar("transacoes", JSON.stringify(this.transacoes));
   }
 
   private debitar(valor: number): void {
@@ -86,7 +85,7 @@ export class Conta {
     }
 
     this.saldo -= valor;
-    localStorage.setItem("saldo", this.saldo.toString());
+    Armazenador.salvar("saldo", this.saldo.toString());
   }
 
   private depositar(valor: number): void {
@@ -95,7 +94,7 @@ export class Conta {
     }
 
     this.saldo += valor;
-    localStorage.setItem("saldo", this.saldo.toString());
+    Armazenador.salvar("saldo", this.saldo.toString());
   }
 }
 
