@@ -104,7 +104,7 @@ export class ContaPremium extends Conta  {
       console.log("Ganhou um bônus de 0.50 centavos");
       transacao.valor += 0.5
     }
-    this.registrarTransacao(transacao);
+    super.registrarTransacao(transacao);
   }
 }
 
